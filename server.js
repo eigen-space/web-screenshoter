@@ -41,13 +41,37 @@ app.post('/make', async (req, res) => {
     }
 });
 
-app.listen(port, () => console.log(`app listening on port ${port}!`));
+const server = app.listen(port, () => console.log(`app listening on port ${port}!`));
 
-process.on('exit', async () => {
-    console.log('shutdown...');
-    await browser.close();
-    console.log('browser are closed successfully');
+process.on('SIGTERM', shutDown);
+process.on('SIGINT', shutDown);
+
+let connections = [];
+
+server.on('connection', connection => {
+    connections.push(connection);
+    connection.on('close', () => connections = connections.filter(curr => curr !== connection));
 });
+
+async function shutDown() {
+    server.close(() => {
+        console.log('Closed out remaining connections');
+        process.exit(0);
+    });
+
+    setTimeout(() => {
+        console.error('Could not close connections in time, forcefully shutting down');
+        process.exit(1);
+    }, 10000);
+
+    if (browser) {
+        await browser.close();
+        console.log('Browser are closed successfully');
+    }
+
+    connections.forEach(curr => curr.end());
+    setTimeout(() => connections.forEach(curr => curr.destroy()), 5000);
+}
 
 // Solve 'possible EventEmitter memory leak detected'
 process.setMaxListeners(0);
