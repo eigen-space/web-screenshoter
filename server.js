@@ -34,8 +34,8 @@ app.post('/make', async (req, res) => {
             screenshot = await page.screenshot();
         }
 
+        await page.close();
         res.type('json').send({ screenshot });
-        page.close();
     } catch (err) {
         res.status(500).send(err.toString());
     }
