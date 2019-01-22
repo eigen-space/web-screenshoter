@@ -64,6 +64,8 @@ async function shutDown() {
         process.exit(1);
     }, 10000);
 
+    const browser = await browserPromise;
+
     if (browser) {
         await browser.close();
         console.log('Browser are closed successfully');
