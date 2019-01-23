@@ -14,7 +14,7 @@ app.use(async (request, response, next) => {
     next();
 });
 
-app.use(express.json());
+app.use(express.json({limit: '10mb', extended: true}));
 
 app.get('/', (req, res) => res.send('Hi! This is screenshoter service!'));
 
