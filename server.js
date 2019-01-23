@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const app = express();
 const port = process.env.port || 3030;
 
-const browserPromise = puppeteer.launch();
+const browserPromise = puppeteer.launch({args: ['--no-sandbox']});
 
 app.use(async (request, response, next) => {
     // Enable CORS
@@ -41,7 +41,7 @@ app.post('/make', async (req, res) => {
     }
 });
 
-const server = app.listen(port, () => console.log(`app listening on port ${port}!`));
+const server = app.listen(port, '0.0.0.0', () => console.log(`app listening on port ${port}!`));
 
 process.on('SIGTERM', shutDown);
 process.on('SIGINT', shutDown);
