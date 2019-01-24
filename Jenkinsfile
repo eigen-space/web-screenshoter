@@ -4,10 +4,12 @@ pipeline {
     }
     stages {
         stage('Test') {
+            when {
+                branch 'master';
+            }
+
             steps {
                 sh 'node --version';
-                set +x;
-                echo 'this is credentials: $FrontendDevAMSCredentials';
             }
         }
     }
