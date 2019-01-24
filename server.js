@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const app = express();
 const port = process.env.port || 3030;
 
-const browserPromise = puppeteer.launch({args: ['--no-sandbox']});
+const browserPromise = puppeteer.launch({ args: ['--no-sandbox'] });
 
 app.use(async (request, response, next) => {
     // Enable CORS
@@ -14,7 +14,7 @@ app.use(async (request, response, next) => {
     next();
 });
 
-app.use(express.json({limit: '10mb', extended: true}));
+app.use(express.json({ limit: '10mb', extended: true }));
 
 app.get('/', (req, res) => res.send('Hi! This is screenshoter service!'));
 
@@ -37,7 +37,7 @@ app.post('/make', async (req, res) => {
     } catch (err) {
         res.status(500).send(err.toString());
     } finally {
-        page.close()
+        page.close();
     }
 });
 
