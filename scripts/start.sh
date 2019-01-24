@@ -1,5 +1,5 @@
 #!/bin/bash
 
-chmod -R u=rwX,g=rwX,o=rX /opt/screenshoter/
+chmod -R 755 /opt/screenshoter
 cd /opt/screenshoter/
 yarn && nohup node ../server.js &
