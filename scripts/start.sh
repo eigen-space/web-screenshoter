@@ -1,4 +1,3 @@
 #!/bin/bash
 
-cd /opt/screenshoter/
-yarn && nohup node ../server.js &
+nohup node ../server.js &
