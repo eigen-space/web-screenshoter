@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nohup node ../server.js &
+yarn && nohup node ../server.js &
