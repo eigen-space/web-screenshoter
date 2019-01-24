@@ -6,7 +6,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'node --version';
-                sh 'this is credentials ${FrontendDevAMSCredentials}';
+                set +x;
+                echo 'this is credentials: $FrontendDevAMSCredentials';
             }
         }
     }
