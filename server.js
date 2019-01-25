@@ -68,7 +68,7 @@ async function shutDown() {
 
     if (browser) {
         await browser.close();
-        console.log('Browser are closed successfully');
+        console.log('Browser are closed successfully!');
     }
 
     connections.forEach(curr => curr.end());
