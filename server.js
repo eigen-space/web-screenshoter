@@ -28,7 +28,10 @@ app.post('/make', async (req, res) => {
 
         let screenshot;
         if (elem) {
-            screenshot = await elem.screenshot();
+            const clip = await elem.boundingBox();
+            clip.width = clip.width || 1;
+            clip.height = clip.height || 1;
+            screenshot = await elem.screenshot({clip});
         } else {
             screenshot = await page.screenshot();
         }
