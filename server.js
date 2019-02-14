@@ -31,7 +31,7 @@ app.post('/make', async (req, res) => {
             const clip = await elem.boundingBox();
             clip.width = clip.width || 1;
             clip.height = clip.height || 1;
-            screenshot = await elem.screenshot({clip});
+            screenshot = await elem.screenshot({ clip });
         } else {
             screenshot = await page.screenshot();
         }
