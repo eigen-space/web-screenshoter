@@ -2,9 +2,10 @@
 
 const express = require('express');
 const puppeteer = require('puppeteer');
+const argv = require('minimist')(process.argv.slice(2));
 
 const app = express();
-const port = process.env.port || 3030;
+const port = argv.port || 3030;
 
 const browserPromise = puppeteer.launch({ args: ['--no-sandbox'] });
 
