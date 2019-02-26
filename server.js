@@ -27,6 +27,8 @@ app.post('/make', async (req, res) => {
         await page.setContent(req.body.html);
         const elem = await page.$('body > *');
 
+        await emulateAction(page);
+
         let screenshot;
         if (elem) {
             const clip = await elem.boundingBox();
@@ -44,6 +46,18 @@ app.post('/make', async (req, res) => {
         page.close();
     }
 });
+
+async function emulateAction(page) {
+    try {
+        await page.focus('.arrival-emulated-action-focus');
+    } catch (e) {
+    }
+
+    try {
+        await page.hover('.arrival-emulated-action-hover');
+    } catch (e) {
+    }
+}
 
 const server = app.listen(port, '0.0.0.0', () => console.log(`app listening on port ${port}!`));
 
