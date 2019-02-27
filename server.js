@@ -1,5 +1,6 @@
 'use strict';
 
+const { EmulateActionType } = require('./common/enums/emulate-action-type.enum');
 const express = require('express');
 const puppeteer = require('puppeteer');
 const argv = require('minimist')(process.argv.slice(2));
@@ -48,13 +49,21 @@ app.post('/make', async (req, res) => {
 });
 
 async function emulateAction(page) {
+    await page.evaluate(
+        (className) => {
+            const scrolableitems = Array.from(document.getElementsByClassName(className));
+            scrolableitems.forEach(item => item.scrollTop = Number(item.getAttribute(`data-${className}`)));
+        },
+        [EmulateActionType.SCROLL_Y]
+    );
+
     try {
-        await page.focus('.arrival-emulated-action-focus');
+        await page.focus(`.${EmulateActionType.FOCUS}`);
     } catch (e) {
     }
 
     try {
-        await page.hover('.arrival-emulated-action-hover');
+        await page.hover(`.${EmulateActionType.HOVER}`);
     } catch (e) {
     }
 }
