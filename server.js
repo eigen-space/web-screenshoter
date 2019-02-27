@@ -50,20 +50,20 @@ app.post('/make', async (req, res) => {
 
 async function emulateAction(page) {
     await page.evaluate(
-        (className) => {
-            const scrolableitems = Array.from(document.getElementsByClassName(className));
-            scrolableitems.forEach(item => item.scrollTop = Number(item.getAttribute(`data-${className}`)));
+        (attributeSelector) => {
+            const scrolableitems = Array.from(document.querySelectorAll(attributeSelector));
+            scrolableitems.forEach(item => item.scrollTop = Number(item.getAttribute(attributeSelector)));
         },
-        [EmulateActionType.SCROLL_Y]
+        [`[${EmulateActionType.SCROLL_Y}]`]
     );
 
     try {
-        await page.focus(`.${EmulateActionType.FOCUS}`);
+        await page.focus(`[${EmulateActionType.FOCUS}]`);
     } catch (e) {
     }
 
     try {
-        await page.hover(`.${EmulateActionType.HOVER}`);
+        await page.hover(`[${EmulateActionType.HOVER}]`);
     } catch (e) {
     }
 }
