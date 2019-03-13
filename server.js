@@ -51,8 +51,8 @@ app.post('/make', async (req, res) => {
 async function emulateAction(page) {
     await page.evaluate(
         (attribute) => {
-            const scrolableitems = Array.from(document.querySelectorAll(`[${attribute}]`));
-            scrolableitems.forEach(item => item.scrollTop = Number(item.getAttribute(attribute)));
+            const scrollableItems = Array.from(document.querySelectorAll(`[${attribute}]`));
+            scrollableItems.forEach(item => item.scrollTop = Number(item.getAttribute(attribute)));
         },
         [EmulateActionType.SCROLL_Y]
     );
