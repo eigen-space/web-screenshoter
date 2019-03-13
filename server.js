@@ -48,6 +48,23 @@ app.post('/make', async (req, res) => {
     }
 });
 
+const server = app.listen(port, '0.0.0.0', () => console.log(`app listening on port ${port}!`));
+
+process.on('SIGTERM', shutDown);
+process.on('SIGINT', shutDown);
+
+let connections = [];
+
+server.on('connection', connection => {
+    connections.push(connection);
+    connection.on('close', () => connections = connections.filter(curr => curr !== connection));
+});
+
+// Solve 'possible EventEmitter memory leak detected'
+process.setMaxListeners(0);
+
+// Functions
+
 async function emulateAction(page) {
     await page.evaluate(
         (attribute) => {
@@ -63,18 +80,6 @@ async function emulateAction(page) {
     const elementToHover = await page.$$(`[${EmulateActionType.HOVER}]`);
     await elementToHover.forEach(elem => elem.hover());
 }
-
-const server = app.listen(port, '0.0.0.0', () => console.log(`app listening on port ${port}!`));
-
-process.on('SIGTERM', shutDown);
-process.on('SIGINT', shutDown);
-
-let connections = [];
-
-server.on('connection', connection => {
-    connections.push(connection);
-    connection.on('close', () => connections = connections.filter(curr => curr !== connection));
-});
 
 async function shutDown() {
     server.close(() => {
@@ -97,6 +102,3 @@ async function shutDown() {
     connections.forEach(curr => curr.end());
     setTimeout(() => connections.forEach(curr => curr.destroy()), 5000);
 }
-
-// Solve 'possible EventEmitter memory leak detected'
-process.setMaxListeners(0);
