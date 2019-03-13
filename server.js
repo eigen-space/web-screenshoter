@@ -57,15 +57,11 @@ async function emulateAction(page) {
         [EmulateActionType.SCROLL_Y]
     );
 
-    try {
-        await page.focus(`[${EmulateActionType.FOCUS}]`);
-    } catch (e) {
-    }
+    const elementToFocus = await page.$$(`[${EmulateActionType.FOCUS}]`);
+    await elementToFocus.forEach(elem => elem.focus());
 
-    try {
-        await page.hover(`[${EmulateActionType.HOVER}]`);
-    } catch (e) {
-    }
+    const elementToHover = await page.$$(`[${EmulateActionType.HOVER}]`);
+    await elementToHover.forEach(elem => elem.hover());
 }
 
 const server = app.listen(port, '0.0.0.0', () => console.log(`app listening on port ${port}!`));
