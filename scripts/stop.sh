@@ -3,7 +3,7 @@
 read port <<< $(lsof -i :3030 | grep -v 'PID'| awk '{print $2}')
 echo $port
 
-if [ -z "$port" ]
+if [ "$port" ]
   then
-    echo "No argument supplied"
+    kill $port
 fi
