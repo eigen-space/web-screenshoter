@@ -1,4 +1,4 @@
-# About
+# About [![Build Status](http://ci.smekalka.com/buildStatus/icon?job=ams.web-screenshoter)](http://ci.smekalka.com/view/AMS/job/ams.web-screenshoter/)
 
 Screenshoter is a service to make html page screenshots based on puppeteer.
 
