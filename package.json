@@ -4,7 +4,9 @@
     "description": "Service to make html page screenshot",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node server.js",
+        "build": "node ./dev/scripts/build.js",
+        "script:update-deps-remote": "npx -p @eigenspace/helper-scripts update-deps"
     },
     "repository": {
         "type": "git",
@@ -20,5 +22,8 @@
         "express": "4.16.4",
         "minimist": "1.2.0",
         "puppeteer": "1.11.0"
+    },
+    "devDependencies": {
+        "@eigenspace/helper-scripts": "1.0.61"
     }
 }
