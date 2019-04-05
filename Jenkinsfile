@@ -2,5 +2,6 @@
 
 runServiceProjectPipeline(
     project: 'web-screenshoter',
-    deployPath: '/opt/services/screenshoter'
+    deployPath: '/opt/services/screenshoter',
+    stages: [lint: false, test: false]
 )
