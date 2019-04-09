@@ -23,15 +23,23 @@ app.get('/', (req, res) => res.send('Hi! This is screenshoter service!'));
 app.post('/make', async (req, res) => {
     let page;
     try {
+        const { html, viewport } = req.body;
+
         const browser = await browserPromise;
         page = await browser.newPage();
-        await page.setContent(req.body.html);
+
+        if (viewport) {
+            await page.setViewport(viewport);
+        }
+
+        await page.setContent(html);
+
         const elem = await page.$('body > *');
 
         await emulateAction(page);
 
         let screenshot;
-        if (elem) {
+        if (elem && !viewport) {
             const clip = await elem.boundingBox();
             clip.width = clip.width || 1;
             clip.height = clip.height || 1;
