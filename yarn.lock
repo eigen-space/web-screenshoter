@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@eigenspace/codestyle/-/codestyle-1.1.50.tgz#4569e97e10dc14c741048ff2a5fe05e3ea5fe291"
   integrity sha512-Q8vHu8fKzNSraoEImYgsEzUV3jY6dEl3Z6uXc6Uon4KNxyFEL5DiSHLna3Gns8fYOdsQT7Qlg4RoZPLQy+fy9Q==
 
-"@eigenspace/helper-scripts@1.0.61":
-  version "1.0.61"
-  resolved "https://registry.yarnpkg.com/@eigenspace/helper-scripts/-/helper-scripts-1.0.61.tgz#9bc5efd0108b975366d93ec6606bc9cdb0d34d6a"
-  integrity sha512-qo+AXi6pl103xjCa3Zq6FrdFRcmd8MN1wSpWoiFqJdKA1jUtUK0NXLYAt8dI5M7Dbs4mkki33+YHVXRval42NQ==
+"@eigenspace/helper-scripts@1.0.65":
+  version "1.0.65"
+  resolved "https://registry.yarnpkg.com/@eigenspace/helper-scripts/-/helper-scripts-1.0.65.tgz#de128b1b694817dd656809bfa60bbdfcc96609ca"
+  integrity sha512-jsyP7hE5fmleRRRytwMxqkR5gZKGBS7r58Nsyfmi+fkBq2HbSiDLuSDPG4Em0uP0oliRKISMwHQPoKg3QFfY3A==
   dependencies:
     minimist "1.2.0"
 

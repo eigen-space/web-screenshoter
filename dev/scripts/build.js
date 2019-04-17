@@ -7,4 +7,4 @@ if(fs.existsSync(target)) {
     CommonScripts.removeDirectory(target);
 }
 
-copy(['common', 'config', 'scripts', 'package.json', 'server.js', 'yarn.lock'], target);
+copy(['common', 'package.json', 'index.js', 'yarn.lock'], target);
