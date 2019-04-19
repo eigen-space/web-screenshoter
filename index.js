@@ -60,14 +60,14 @@ app.post('/make', async (req, res) => {
     }
 });
 
-const index = app.listen(port, '0.0.0.0', () => console.log(`app listening on port ${port}!`));
+const server = app.listen(port, '0.0.0.0', () => console.log(`app listening on port ${port}!`));
 
 process.on('SIGTERM', shutDown);
 process.on('SIGINT', shutDown);
 
 let connections = [];
 
-index.on('connection', connection => {
+server.on('connection', connection => {
     connections.push(connection);
     connection.on('close', () => connections = connections.filter(curr => curr !== connection));
 });
@@ -94,7 +94,7 @@ async function emulateAction(page) {
 }
 
 async function shutDown() {
-    index.close(() => {
+    server.close(() => {
         console.log('Closed out remaining connections');
         process.exit(0);
     });
