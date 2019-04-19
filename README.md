@@ -32,9 +32,9 @@ You can check the availability of the service at the link `http://127.0.0.1:3030
 
 * `express` - application framework for Node.js.
 * `puppeteer` - a Node library which provides a high-level API to control Chromium or Chrome over the DevTools Protocol.
+* `@eigenspace/helper-scripts` - common scripts for dev. environment.
 
 # Why do we have that dev dependencies?
 
 * `@eigenspace/codestyle` - includes tslint rules, config for typescript.
-* `@eigenspace/helper-scripts` - common scripts for dev. environment.
 * `husky` - used for configure git hooks.
