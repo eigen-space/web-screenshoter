@@ -2,10 +2,15 @@
 # yarn lockfile v1
 
 
-"@eigenspace/codestyle@latest":
-  version "1.1.50"
-  resolved "https://registry.yarnpkg.com/@eigenspace/codestyle/-/codestyle-1.1.50.tgz#4569e97e10dc14c741048ff2a5fe05e3ea5fe291"
-  integrity sha512-Q8vHu8fKzNSraoEImYgsEzUV3jY6dEl3Z6uXc6Uon4KNxyFEL5DiSHLna3Gns8fYOdsQT7Qlg4RoZPLQy+fy9Q==
+"@eigenspace/argument-parser@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@eigenspace/argument-parser/-/argument-parser-1.0.3.tgz#4be66550108f65833a6daa96cf08178c4f58cf7e"
+  integrity sha512-8358Yi2Y+lZEp52YroK8kH4d64xnWfatJerrkTAwtakGKG1dHu99nfurmJCyuiiHNk9+GPUu8E/lFTSZ/tgwfw==
+
+"@eigenspace/codestyle@1.1.56":
+  version "1.1.56"
+  resolved "https://registry.yarnpkg.com/@eigenspace/codestyle/-/codestyle-1.1.56.tgz#c7e8f34fbf8a4c3ec63dfe5d55ed9a382bac6741"
+  integrity sha512-1AD+fiwM8eEA6zdrkc9vQUBYL0vcuWEOrbfKbv7zwegSXDRo5jugqkAHloHFwNcFbiXUfhkfvB4hJMdXtz/C+Q==
 
 "@eigenspace/helper-scripts@1.0.65":
   version "1.0.65"
