@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@eigenspace/argument-parser@^1.0.3":
+"@eigenspace/argument-parser@1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@eigenspace/argument-parser/-/argument-parser-1.0.3.tgz#4be66550108f65833a6daa96cf08178c4f58cf7e"
   integrity sha512-8358Yi2Y+lZEp52YroK8kH4d64xnWfatJerrkTAwtakGKG1dHu99nfurmJCyuiiHNk9+GPUu8E/lFTSZ/tgwfw==

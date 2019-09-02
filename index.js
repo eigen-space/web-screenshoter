@@ -33,6 +33,9 @@ app.post('/make', async (req, res) => {
         const browser = await browserPromise;
         page = await browser.newPage();
 
+        const devtoolsProtocolClient = await page.target().createCDPSession();
+        await devtoolsProtocolClient.send('Performance.enable');
+
         if (viewport) {
             await page.setViewport(viewport);
         }
@@ -42,6 +45,26 @@ app.post('/make', async (req, res) => {
         const elem = await page.$('body > *');
 
         await emulateAction(page);
+
+        let firstMeaningfulPaint = 0;
+        let performanceMetrics;
+        while (firstMeaningfulPaint === 0) {
+            await page.waitFor(100);
+            performanceMetrics = await devtoolsProtocolClient.send('Performance.getMetrics');
+            firstMeaningfulPaint = extractDataFromPerformanceMetrics(
+                performanceMetrics.metrics,
+                'FirstMeaningfulPaint'
+            );
+        }
+
+        const metrics = performanceMetrics.metrics;
+        console.log( metrics );
+
+        console.log('aaaaaaa duration of all tasks', extractDataFromPerformanceMetrics(metrics, 'TaskDuration'));
+        console.log('aaaaaaa duration of JavaScript execution', extractDataFromPerformanceMetrics(metrics, 'ScriptDuration'));
+        console.log('aaaaaaa duration of all page style recalculations', extractDataFromPerformanceMetrics(metrics, 'RecalcStyleDuration'));
+        console.log('aaaaaaa time it takes for a page\'s primary content to appear on the screen', getFirstMeaningfulPaintTimestamp(metrics));
+        console.log('aaaaaaa JS heap size (MB)', getHeapSize(metrics));
 
         let screenshot;
         if (elem && !viewport) {
@@ -92,6 +115,24 @@ async function emulateAction(page) {
 
     const elementToHover = await page.$$(`[${EmulateActionType.HOVER}]`);
     await elementToHover.forEach(elem => elem.hover());
+}
+
+function countFps() {
+}
+
+function extractDataFromPerformanceMetrics(metrics, name) {
+    return metrics.find(x => x.name === name).value
+}
+
+function getFirstMeaningfulPaintTimestamp(metrics) {
+    const navigationStart = extractDataFromPerformanceMetrics(metrics, 'NavigationStart');
+    const firstMeaningfulPaint = extractDataFromPerformanceMetrics(metrics, 'FirstMeaningfulPaint');
+    return firstMeaningfulPaint - navigationStart;
+}
+
+function getHeapSize(metrics) {
+    const size = extractDataFromPerformanceMetrics(metrics, 'JSHeapTotalSize');
+    return size / 1024 ** 2;
 }
 
 async function shutDown() {
