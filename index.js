@@ -42,6 +42,10 @@ app.post('/make', async (req, res) => {
 
         await page.setContent(html);
 
+        page.on('console', consoleObj => console.log(consoleObj.text()));
+        await countFps(page);
+        await page.waitFor(3000);
+
         const elem = await page.$('body > *');
 
         await emulateAction(page);
@@ -58,13 +62,13 @@ app.post('/make', async (req, res) => {
         }
 
         const metrics = performanceMetrics.metrics;
-        console.log( metrics );
+        // console.log( metrics );
 
-        console.log('aaaaaaa duration of all tasks', extractDataFromPerformanceMetrics(metrics, 'TaskDuration'));
-        console.log('aaaaaaa duration of JavaScript execution', extractDataFromPerformanceMetrics(metrics, 'ScriptDuration'));
-        console.log('aaaaaaa duration of all page style recalculations', extractDataFromPerformanceMetrics(metrics, 'RecalcStyleDuration'));
-        console.log('aaaaaaa time it takes for a page\'s primary content to appear on the screen', getFirstMeaningfulPaintTimestamp(metrics));
-        console.log('aaaaaaa JS heap size (MB)', getHeapSize(metrics));
+        // console.log('aaaaaaa duration of all tasks', extractDataFromPerformanceMetrics(metrics, 'TaskDuration'));
+        // console.log('aaaaaaa duration of JavaScript execution', extractDataFromPerformanceMetrics(metrics, 'ScriptDuration'));
+        // console.log('aaaaaaa duration of all page style recalculations', extractDataFromPerformanceMetrics(metrics, 'RecalcStyleDuration'));
+        // console.log('aaaaaaa time it takes for a page\'s primary content to appear on the screen', getFirstMeaningfulPaintTimestamp(metrics));
+        // console.log('aaaaaaa JS heap size (MB)', getHeapSize(metrics));
 
         let screenshot;
         if (elem && !viewport) {
@@ -78,6 +82,7 @@ app.post('/make', async (req, res) => {
 
         res.type('json').send({ screenshot });
     } catch (err) {
+        console.log('aaaaaaa err', err);
         res.status(500).send(err.toString());
     } finally {
         page.close();
@@ -117,7 +122,27 @@ async function emulateAction(page) {
     await elementToHover.forEach(elem => elem.hover());
 }
 
-function countFps() {
+async function countFps(page) {
+    return page.evaluate(
+        () => {
+            const times = [];
+            const fpsArray = [];
+
+            function refreshLoop() {
+                window.requestAnimationFrame(() => {
+                    const now = performance.now();
+                    while (times.length > 0 && times[0] <= now - 1000) {
+                        times.shift();
+                    }
+                    times.push(now);
+                    fpsArray.push(times.length);
+                    console.log('aaaa fps', times.length);
+                    refreshLoop();
+                });
+            }
+            refreshLoop();
+        }
+    );
 }
 
 function extractDataFromPerformanceMetrics(metrics, name) {
