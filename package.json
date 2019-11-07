@@ -26,12 +26,13 @@
         }
     },
     "dependencies": {
+        "@eigenspace/argument-parser": "1.0.3",
+        "@eigenspace/helper-scripts": "1.0.65",
         "express": "4.16.4",
-        "puppeteer": "1.11.0",
-        "@eigenspace/helper-scripts": "1.0.65"
+        "puppeteer": "1.11.0"
     },
     "devDependencies": {
-        "@eigenspace/codestyle": "latest",
+        "@eigenspace/codestyle": "1.1.56",
         "husky": "1.3.1"
     }
 }
