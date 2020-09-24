@@ -1,5 +1,5 @@
 {
-    "name": "@cybernated/screenshoter",
+    "name": "@eigenspace/screenshoter",
     "version": "1.0.0",
     "description": "Service to make html page screenshot",
     "main": "index.js",
