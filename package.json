@@ -26,7 +26,6 @@
         }
     },
     "dependencies": {
-        "@eigenspace/argument-parser": "1.0.3",
         "@eigenspace/helper-scripts": "1.0.65",
         "express": "4.16.4",
         "puppeteer": "1.11.0"

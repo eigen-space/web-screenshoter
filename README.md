@@ -30,7 +30,6 @@ You can check the availability of the service at the link `http://127.0.0.1:3030
 
 # Why do we have that dependencies?
 
-* `@eigenspace/argument-parser` - used for argument parsing.
 * `@eigenspace/helper-scripts` - common scripts for dev environment.
 * `express` - application framework for Node.js.
 * `puppeteer` - a Node library which provides a high-level API to control Chromium or Chrome over the DevTools Protocol.

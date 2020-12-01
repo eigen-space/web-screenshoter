@@ -1,17 +1,12 @@
 'use strict';
 
-const { ArgumentParser } = require('@eigenspace/argument-parser');
 const { EmulateActionType } = require('./common/enums/emulate-action-type.enum');
 const express = require('express');
 const puppeteer = require('puppeteer');
 
 const app = express();
-const parser = new ArgumentParser();
 
-const params = parser.get(process.argv.slice(2));
-
-const httpParam = params.get('httpPort');
-const port = httpParam || 3040;
+const port = process.env.PORT || 3040;
 
 const browserPromise = puppeteer.launch({ args: ['--no-sandbox'] });
 
