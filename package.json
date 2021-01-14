@@ -1,0 +1,38 @@
+{
+    "name": "@eigenspace/screenshoter",
+    "version": "1.0.0",
+    "description": "Service to make html page screenshot",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/eigen-space/screenshoter.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/eigen-space/screenshoter/issues"
+    },
+    "homepage": "https://github.com/eigen-space/screenshoter#readme",
+    "scripts": {
+        "start": "node index.js",
+        "build": "node ./dev/scripts/build.js",
+        "lint:markdown": "node ./node_modules/@eigenspace/codestyle/scripts/markdown-lint.js",
+        "hooks:pre-push": "yarn lint:markdown && yarn build",
+        "script:update-deps-remote": "npx -p @eigenspace/helper-scripts update-deps"
+    },
+    "husky": {
+        "hooks": {
+            "pre-push": "yarn hooks:pre-push"
+        }
+    },
+    "dependencies": {
+        "@eigenspace/argument-parser": "1.0.3",
+        "@eigenspace/helper-scripts": "1.0.65",
+        "express": "4.16.4",
+        "puppeteer": "1.11.0"
+    },
+    "devDependencies": {
+        "@eigenspace/codestyle": "1.1.56",
+        "husky": "1.3.1"
+    }
+}
